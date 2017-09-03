@@ -1,0 +1,51 @@
+1.
+double log10 = 0.0F;
+log10 = Math.log10(2048)/Math.log10(2);
+
+2.
+2(k(k+1)/2)+k
+
+3.
+Counterexample is when n = 1
+
+4.
+Contradiction is that the square root of an odd number is odd. By definition, a square of a number is it times itself. As the definition of an odd number is 2k+1, and having k = 2k+1, 2(2k+1) + 1 is always odd, which proves by contradiction.
+
+6.
+a)
+public static void rec(int a)
+{
+			
+	if (a == 0)
+		{
+		System.out.print(" " + 0 + " ");
+		return;
+		}
+			else
+		{
+			System.out.print(" " + a + " ");
+			rec(a-1);
+			System.out.print(" " + a + " ");
+			return;
+		}
+			
+}
+b)
+public static int recArr(int []arr, int pos) {
+	int count = 0;
+	if((arr[pos] % 2) == 1) {
+		count++;
+	}
+	if(pos < arr.length-1) {
+		count+=recArr(arr,pos+1);
+	}
+	return count;
+}
+7.
+str1="first";
+str2="second";
+Pair<String> a = new Pair<>();
+a.setFirst(str1);
+a.setSecond(str2);
+System.out.println(a.getFirst());
+System.out.println(a.getSecond());
