@@ -1,4 +1,4 @@
-CS3345
+CS3345 Data Structures and Algorithmic Analysis
 =======
 
 Homeworks
