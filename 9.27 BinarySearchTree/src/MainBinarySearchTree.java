@@ -12,15 +12,17 @@ public class MainBinarySearchTree {
 		b.insert(3);
 		b.insert(7);
 		b.insert(9);
-		b.nodeCount();
-		b.nodeCount();
-		System.out.print("\n");
-		b.isFull();
-		System.out.print("\n");
-		b.printTree();
 		
-		b.makeEmpty();
-		b.printTree();
+		BinarySearchTree a = new BinarySearchTree<Integer>();
+		a.insert(6);
+		a.insert(4);
+		a.insert(3);
+		a.insert(5);
+		a.insert(3);
+		a.insert(7); 
+		a.insert(9);
+		
+		b.equals(a);
 		
 		System.exit(0);
 	}

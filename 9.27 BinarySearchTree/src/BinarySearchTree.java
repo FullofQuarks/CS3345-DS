@@ -167,6 +167,34 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
 		else
 			return 0;
     }
+    
+    public void equals(BinarySearchTree<AnyType> t)
+    {
+    		int isEqual = 0;
+    		BinaryNode otherRoot = t.root;
+    		isEqual = equals(root, otherRoot);
+    		if(isEqual != 0)
+    		{
+    			System.out.println("These trees do NOT have similar structures.");
+    		}
+    		else
+    		{
+    			System.out.println("These trees have similar structures.");
+    		}
+    		System.out.println("isEqual is " + isEqual);
+    }
+    
+    public int equals(BinaryNode<AnyType> a, BinaryNode<AnyType> b)
+    {
+    		if(a != null && b != null)
+    		{
+	    		equals(a.left, b.left);
+	    		equals(a.right, b.right);
+    		}
+    		else
+    			return 1;
+    		return (equals(a.left, b.left) + equals(a.right, b.right));
+    }
 
     /**
      * Internal method to insert into a subtree.
