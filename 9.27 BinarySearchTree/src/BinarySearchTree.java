@@ -217,6 +217,34 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
 			return a == b;
 		return (equals(a.left, b.left) && equals(a.right, b.right));
     }
+    
+    public BinarySearchTree<AnyType> copy( )
+    {
+    	BinarySearchTree<AnyType> newBST = new BinarySearchTree<AnyType>();
+    	newBST.root = this.root;
+    	copy(root, newBST.root);
+    	return newBST;
+    }
+    
+    private void copy(BinaryNode<AnyType> x, BinaryNode<AnyType> n)
+    {
+    	if(x.left != null)
+    	{
+    		n.left = deepClone(x.left);
+    		copy(x.left, n.left);
+    	}
+    	if(x.right != null)
+    	{
+    		n.right = deepClone(x.right);
+    		copy(x.right, n.right);
+    	}
+    }
+    
+    private BinaryNode<AnyType> deepClone(BinaryNode<AnyType> x)
+    {
+    	BinaryNode<AnyType> clone = new BinaryNode<AnyType>(x.element, x.left, x.right);
+    	return clone;
+    }
 
     /**
      * Internal method to insert into a subtree.
