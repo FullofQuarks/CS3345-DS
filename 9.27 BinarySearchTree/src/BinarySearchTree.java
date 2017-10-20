@@ -245,6 +245,26 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     	BinaryNode<AnyType> clone = new BinaryNode<AnyType>(x.element, x.left, x.right);
     	return clone;
     }
+    
+    public BinarySearchTree<AnyType> mirror()
+    {
+    	BinarySearchTree<AnyType> mirrored = new BinarySearchTree<AnyType>();
+    	mirrored = this.copy();
+    	mirror(mirrored.root);
+    	return mirrored; 
+    }
+    
+    private BinaryNode<AnyType> mirror(BinaryNode<AnyType> x)
+    {
+    	if(x == null)
+    		return x;
+		BinaryNode<AnyType> left = mirror(x.left);
+		BinaryNode<AnyType> right = mirror(x.right);
+		x.left = right;
+		x.right = left;
+		
+		return x;
+    }
 
     /**
      * Internal method to insert into a subtree.
