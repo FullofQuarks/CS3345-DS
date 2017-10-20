@@ -168,32 +168,46 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
 			return 0;
     }
     
-    public void equals(BinarySearchTree<AnyType> t)
+    public void compareStructure(BinarySearchTree<AnyType> t)
     {
     		int isEqual = 0;
     		BinaryNode otherRoot = t.root;
-    		isEqual = equals(root, otherRoot);
-    		if(isEqual != 0)
+    		if(compareStructure(root, otherRoot))
     		{
-    			System.out.println("These trees do NOT have similar structures.");
+    			System.out.println("The structures are similar.");
     		}
     		else
     		{
-    			System.out.println("These trees have similar structures.");
+    			System.out.println("The structures are not similar");
     		}
-    		System.out.println("isEqual is " + isEqual);
     }
     
-    public int equals(BinaryNode<AnyType> a, BinaryNode<AnyType> b)
+    public boolean compareStructure(BinaryNode<AnyType> a, BinaryNode<AnyType> b)
     {
-    		if(a != null && b != null)
+    		if(a.left == null || b.left == null) 
     		{
-	    		equals(a.left, b.left);
-	    		equals(a.right, b.right);
+    			return a.left == b.left;  
     		}
-    		else
-    			return 1;
-    		return (equals(a.left, b.left) + equals(a.right, b.right));
+    		if(a.right == null || b.left == null)
+    			return a.right == b.right;
+    		return (compareStructure(a.left, b.left) && compareStructure(a.right, b.right));
+    }
+    
+    public void equals(BinarySearchTree<AnyType> t)
+    {
+    		BinaryNode otherRoot = t.root;
+    		System.out.println(equals(root, otherRoot));
+    }
+    
+    private boolean equals(BinaryNode<AnyType> a, BinaryNode<AnyType> b)
+    {
+		if(a.left == null || b.left == null)
+		{
+			return a.element == b.element;  
+		}
+		if(a.right == null || b.left == null)
+			return a == b;
+		return (equals(a.left, b.left) && equals(a.right, b.right));
     }
 
     /**
