@@ -136,7 +136,6 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     		{
     			System.out.println("This tree is NOT a full binary tree.");
     		}
-    		System.out.println("root is " + isFull(root));
     }
     
     private int isFull(BinaryNode<AnyType> t)
@@ -170,19 +169,25 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     
     public void compareStructure(BinarySearchTree<AnyType> t)
     {
-    		int isEqual = 0;
-    		BinaryNode otherRoot = t.root;
-    		if(compareStructure(root, otherRoot))
+    		BinaryNode<AnyType> otherRoot = t.root;
+    		if(otherRoot == null || this.root == null)
+    		{
+    			if(otherRoot == null && this.root == null)
+    				System.out.println("The structures are similar.");
+    			else
+    				System.out.println("The structures are NOT similar.");
+    		}
+    		else if(compareStructure(root, otherRoot))
     		{
     			System.out.println("The structures are similar.");
     		}
     		else
     		{
-    			System.out.println("The structures are not similar");
+    			System.out.println("The structures are not similar.");
     		}
     }
     
-    public boolean compareStructure(BinaryNode<AnyType> a, BinaryNode<AnyType> b)
+    private boolean compareStructure(BinaryNode<AnyType> a, BinaryNode<AnyType> b)
     {
     		if(a.left == null || b.left == null) 
     		{
@@ -195,8 +200,11 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     
     public void equals(BinarySearchTree<AnyType> t)
     {
-    		BinaryNode otherRoot = t.root;
-    		System.out.println(equals(root, otherRoot));
+    		BinaryNode<AnyType> otherRoot = t.root;
+    		if(this.root != null && otherRoot != null)
+    			System.out.println(equals(this.root, otherRoot));
+    		else
+    			System.out.println(this.root == otherRoot);
     }
     
     private boolean equals(BinaryNode<AnyType> a, BinaryNode<AnyType> b)
@@ -205,7 +213,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
 		{
 			return a.element == b.element;  
 		}
-		if(a.right == null || b.left == null)
+		if(a.right == null || b.right == null)
 			return a == b;
 		return (equals(a.left, b.left) && equals(a.right, b.right));
     }
