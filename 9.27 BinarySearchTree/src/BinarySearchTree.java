@@ -21,9 +21,10 @@
  */
 
 import java.util.*;
+import java.lang.Object;
 
-public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
-{
+public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> implements Cloneable
+{ 
     /**
      * Construct the tree.
      */
@@ -214,14 +215,14 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
 			return a.element == b.element;  
 		}
 		if(a.right == null || b.right == null)
-			return a == b;
+			return a.element == b.element;
 		return (equals(a.left, b.left) && equals(a.right, b.right));
     }
     
     public BinarySearchTree<AnyType> copy( )
     {
     	BinarySearchTree<AnyType> newBST = new BinarySearchTree<AnyType>();
-    	newBST.root = this.root;
+    	newBST.root = this.root.deepCopy();
     	copy(root, newBST.root);
     	return newBST;
     }
@@ -242,8 +243,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     
     private BinaryNode<AnyType> deepClone(BinaryNode<AnyType> x)
     {
-    	BinaryNode<AnyType> clone = new BinaryNode<AnyType>(x.element, x.left, x.right);
-    	return clone;
+    	return new BinaryNode<AnyType>(x.element, x.left, x.right);
     }
     
     public BinarySearchTree<AnyType> mirror()
@@ -251,6 +251,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     	BinarySearchTree<AnyType> mirrored = new BinarySearchTree<AnyType>();
     	mirrored = this.copy();
     	mirror(mirrored.root);
+    	
     	return mirrored; 
     }
     
@@ -264,6 +265,13 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
 		x.right = left;
 		
 		return x;
+    }
+    
+    public boolean isMirror(BinarySearchTree<AnyType> n)
+    {
+    	BinarySearchTree<AnyType> temp = new BinarySearchTree<AnyType>();
+    	temp = n.mirror();
+    	return equals(this.root, temp.root);
     }
 
     /**
@@ -404,6 +412,21 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
             element  = theElement;
             left     = lt;
             right    = rt;
+        }
+        
+        BinaryNode<AnyType> deepCopy()
+        {
+        	BinaryNode<AnyType> left = null;
+        	BinaryNode<AnyType> right = null;
+        	if(this.left != null)
+        	{
+        		left = this.left.deepCopy();
+        	}
+        	if(this.right != null)
+        	{
+        		right = this.right.deepCopy();
+        	}
+        	return new BinaryNode<AnyType>(element, left, right);
         }
 
         AnyType element;            // The data in the node
