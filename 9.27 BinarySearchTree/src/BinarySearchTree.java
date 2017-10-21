@@ -11,6 +11,16 @@
 // boolean isEmpty( )     --> Return true if empty; else false
 // void makeEmpty( )      --> Remove all items
 // void printTree( )      --> Print tree in sorted order
+//
+//*****************ADDED METHODS****************************
+// void isFull( )		--> Print if tree is a full binary
+// void compareStructure( BinarySearchTree<AnyType> )
+//		Compares passed BinarySearchTree with current object
+//		and prints if the structures are similar
+// void equals(BinarySearchTree x) --> prints if passed tree
+//		is equal to the current object
+// BinarySearchTree copy( ) --> returns a tree that is a deep
+//		copy of the current tree
 // ******************ERRORS********************************
 // Throws UnderflowException as appropriate
 
@@ -300,8 +310,51 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     	}
     	catch (NullPointerException e)
     	{
-    		System.out.println("This tree cannot be rotated at " + x);
+    		System.out.println("This tree cannot be rotated right at " + x);
     	}
+    }
+    
+    public void rotateLeft(AnyType x)
+    {
+    	try
+    	{
+	    	BinaryNode<AnyType> parent = findParent(x, this.root, this.root);
+	    	if(parent != null && parent.right != null)
+	    	{
+	    		
+	    		BinaryNode<AnyType> tempNode = findNode(x, this.root);
+	    		BinaryNode<AnyType> rightChild = tempNode.right;
+	    		if(rightChild == null)
+	    			throw new NullPointerException();
+	    		if(parent == tempNode)
+	    			this.root = tempNode.right;
+	    		else if(tempNode == parent.right)
+	    			parent.right = rightChild;
+	    		else
+	    			parent.left = rightChild;
+	    		tempNode.right = rightChild.left;
+	    		rightChild.left = tempNode;
+	    	}
+	    	else if(parent.right == null )
+	    		throw new NullPointerException();
+    	}
+    	catch (NullPointerException e)
+    	{
+    		System.out.println("This tree cannot be rotated left at " + x);
+    	}
+    }
+    
+    public void printLevels()
+    {
+    	int height = this.height(root);
+    	printLevels(height, root);
+    }
+    
+    private void printLevels(int height, BinaryNode<AnyType> x)
+    {
+    	if(x == null)
+    		return;
+    	printLevels(height, x.left);
     }
     
     private BinaryNode<AnyType> findParent(AnyType x, BinaryNode<AnyType> node, BinaryNode<AnyType> parent)
