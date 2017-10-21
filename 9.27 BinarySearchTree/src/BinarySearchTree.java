@@ -276,22 +276,32 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
 
     public void rotateRight(AnyType x)
     {
-    	BinaryNode<AnyType> foundNode = findParent(x, this.root, this.root);
-    	if(foundNode != null)
+    	try
     	{
-    		BinaryNode<AnyType> parent = findParent(x, this.root, this.root);
-    		BinaryNode<AnyType> tempNode = findNode(x, this.root);
-    		BinaryNode<AnyType> leftChild = tempNode.left;
-    		if(parent == tempNode)
-    			this.root = tempNode.left;
-    		else
-    			parent.left = leftChild;
-    		tempNode.left = leftChild.right;
-    		leftChild.right = tempNode;
-    		
+	    	BinaryNode<AnyType> parent = findParent(x, this.root, this.root);
+	    	if(parent != null && parent.left != null)
+	    	{
+	    		
+	    		BinaryNode<AnyType> tempNode = findNode(x, this.root);
+	    		BinaryNode<AnyType> leftChild = tempNode.left;
+	    		if(leftChild == null)
+	    			throw new NullPointerException();
+	    		if(parent == tempNode)
+	    			this.root = tempNode.left;
+	    		else if(tempNode == parent.left)
+	    			parent.left = leftChild;
+	    		else
+	    			parent.right = leftChild;
+	    		tempNode.left = leftChild.right;
+	    		leftChild.right = tempNode;
+	    	}
+	    	else if(parent.left == null )
+	    		throw new NullPointerException();
     	}
-    	else
-    		throw new UnderflowException( "Can't rotate right.");
+    	catch (NullPointerException e)
+    	{
+    		System.out.println("This tree cannot be rotated at " + x);
+    	}
     }
     
     private BinaryNode<AnyType> findParent(AnyType x, BinaryNode<AnyType> node, BinaryNode<AnyType> parent)
