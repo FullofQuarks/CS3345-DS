@@ -21,9 +21,8 @@
  */
 
 import java.util.*;
-import java.lang.Object;
 
-public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> implements Cloneable
+public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
 { 
     /**
      * Construct the tree.
