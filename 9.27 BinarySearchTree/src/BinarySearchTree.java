@@ -18,6 +18,7 @@
  * Implements an unbalanced binary search tree.
  * Note that all "matching" is based on the compareTo method.
  * @author Mark Allen Weiss
+ * @author Nicholas Smith - modifications
  */
 
 import java.util.*;
@@ -273,6 +274,57 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     	return equals(this.root, temp.root);
     }
 
+    public void rotateRight(AnyType x)
+    {
+    	BinaryNode<AnyType> foundNode = findParent(x, this.root, this.root);
+    	if(foundNode != null)
+    	{
+    		BinaryNode<AnyType> parent = findParent(x, this.root, this.root);
+    		BinaryNode<AnyType> tempNode = findNode(x, this.root);
+    		BinaryNode<AnyType> leftChild = tempNode.left;
+    		if(parent == tempNode)
+    			this.root = tempNode.left;
+    		else
+    			parent.left = leftChild;
+    		tempNode.left = leftChild.right;
+    		leftChild.right = tempNode;
+    		
+    	}
+    	else
+    		throw new UnderflowException( "Can't rotate right.");
+    }
+    
+    private BinaryNode<AnyType> findParent(AnyType x, BinaryNode<AnyType> node, BinaryNode<AnyType> parent)
+    {
+        if( node == null )
+            return node;
+            
+        int compareResult = x.compareTo( node.element );
+            
+        if( compareResult < 0 )
+            return findParent( x, node.left, node );
+        else if( compareResult > 0 )
+            return findParent( x, node.right, node );
+        else
+            return parent;    // Match, so return the parent
+    }
+    
+    private BinaryNode<AnyType> findNode(AnyType x, BinaryNode<AnyType> node)
+    {
+    	if(node == null)
+    		return node;
+    	
+    	int compareResult = x.compareTo(node.element);
+    	
+    	if(compareResult < 0)
+    		return findNode(x, node.left);
+    	else if(compareResult > 0)
+    		return findNode(x, node.right);
+    	else
+    		return node; //Match
+    }
+    
+    
     /**
      * Internal method to insert into a subtree.
      * @param x the item to insert.
