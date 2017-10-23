@@ -16,6 +16,8 @@ public class Printer {
 		List<OutsidePrintJob> outJobs = new ArrayList<>();
 		int iJobs = 0, oJobs = 0;
 		
+		BinaryHeap<Integer> bh = new BinaryHeap<>();
+		
 		File file = new File(fileName);
 		try { 
 			Scanner sc = new Scanner(file);
@@ -28,7 +30,10 @@ public class Printer {
 				if(tempIO.equals("I"))
 				{
 					PrintJob newJob = new PrintJob(tempUserName, tempPriority, tempNumPages);
+					tempPriority = tempPriority * tempNumPages;
 					jobs.add(newJob);
+					
+					bh.insert(tempPriority);
 					iJobs++;
 				}
 				else
@@ -45,6 +50,8 @@ public class Printer {
 			System.out.println("Cannot find file named " + fileName + ".");
 			System.out.println("Please check spelling or file existence, and try again.");
 		}
+		System.out.println(bh.findMin());
+		
 	}
 
 }
