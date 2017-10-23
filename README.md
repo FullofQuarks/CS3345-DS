@@ -8,6 +8,6 @@ Homeworks
 
 Projects
 --------
-Project 1 is due on September 23rd.
-Project 2 is due on October 21st.
-Project 3 is due on November 4th.
+* Project 1 is due on September 23rd.
+* Project 2 is due on October 21st.
+* Project 3 is due on November 4th.
