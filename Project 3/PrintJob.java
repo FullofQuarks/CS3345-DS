@@ -1,8 +1,15 @@
-//import java.util.*;
-public class PrintJob {
+import java.util.*;
+public class PrintJob implements Comparable {
 	private String userName;
 	protected int numPages;
 	private int priority;
+	
+	public PrintJob()
+	{
+		userName = null;
+		numPages = 0;
+		priority = 0;
+	}
 	
 	public PrintJob(String u, int num, int pri)
 	{
@@ -25,8 +32,8 @@ public class PrintJob {
 	{
 		return priority;
 	}
-	
-	public int compareTo(int arg0) {
+
+	public int compareTo(Object arg0) {
 		return 0;
 	}
 }
