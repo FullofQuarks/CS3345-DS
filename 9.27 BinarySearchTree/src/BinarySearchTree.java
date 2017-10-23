@@ -394,6 +394,8 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
      * @param t the node that roots the subtree.
      * @return the new root of the subtree.
      */
+    
+    //EXAM QUESTION ABOUT THIS METHOD
     private BinaryNode<AnyType> insert( AnyType x, BinaryNode<AnyType> t )
     {
         if( t == null )
@@ -416,6 +418,8 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
      * @param t the node that roots the subtree.
      * @return the new root of the subtree.
      */
+    
+    //EXAM QUESTION ABOUT THIS METHOD
     private BinaryNode<AnyType> remove( AnyType x, BinaryNode<AnyType> t )
     {
         if( t == null )
@@ -442,6 +446,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
      * @param t the node that roots the subtree.
      * @return node containing the smallest item.
      */
+    //EXAM QUESTION ON THIS METHOD
     private BinaryNode<AnyType> findMin( BinaryNode<AnyType> t )
     {
         if( t == null )
