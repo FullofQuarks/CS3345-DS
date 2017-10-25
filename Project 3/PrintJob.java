@@ -1,18 +1,10 @@
 import java.util.*;
 
 public class PrintJob implements Comparable<PrintJob> {
-	private String userName;
+	protected String userName;
 	protected int numPages;
 	private int priority;
-	private int ultPriority;
-	
-	public PrintJob()
-	{
-		userName = null;
-		numPages = 0;
-		priority = 0;
-		ultPriority = priority * numPages;
-	}
+	protected int ultPriority;
 	
 	public PrintJob(String u, int num, int pri)
 	{
@@ -34,18 +26,16 @@ public class PrintJob implements Comparable<PrintJob> {
 	
 	public int getPriority()
 	{
-		return priority;
+		return ultPriority;
+	} 
+	 
+	public String toString()
+	{
+		return String.format("%10s%10d%10d", userName, numPages, ultPriority); 
 	}
 
 	@Override
 	public int compareTo(PrintJob o) {
-		// TODO Auto-generated method stub
-		int otherPriority = o.ultPriority;
-		if(otherPriority < 0)
-		{
-			return otherPriority;
-		}
-		else
-			return ultPriority;
+		return Integer.compare(ultPriority, o.ultPriority);
 	}
 }

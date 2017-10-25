@@ -12,20 +12,11 @@ public class Printer {
 		int tempPriority = 0;
 		int tempNumPages = 0;
 		String tempIO = null;
-		List<PrintJob> jobs = new ArrayList<PrintJob>();
-		List<OutsidePrintJob> outJobs = new ArrayList<>();
+
 		int iJobs = 0, oJobs = 0;
 		
-		BinaryHeap<Integer> bh = new BinaryHeap<>();
-		BinaryHeap<PrintJob> otherJobs = new BinaryHeap<>();
-		
-		OutsidePrintJob temp = new OutsidePrintJob("Nick", 1, 5);
-		OutsidePrintJob temp2 = new OutsidePrintJob("Bob", 1, 3);
-		otherJobs.insert(temp);
-		otherJobs.insert(temp2);
-		
-		bh.insert(45);
-		bh.insert(23);
+		BinaryHeap<PrintJob> jobs = new BinaryHeap<>();
+		BinaryHeap<PrintJob> otherJobs = new BinaryHeap<>(); 
 		
 		File file = new File(fileName);
 		try { 
@@ -40,17 +31,14 @@ public class Printer {
 					if(tempIO.equals("I"))
 					{
 						PrintJob newJob = new PrintJob(tempUserName, tempPriority, tempNumPages);
-						tempPriority = tempPriority * tempNumPages;
-						jobs.add(newJob);
-						
-						bh.insert(tempPriority);
+						jobs.insert(newJob);
 						iJobs++;
 					}
 					else
 					{
 						OutsidePrintJob newJob = new OutsidePrintJob(tempUserName, tempPriority, tempNumPages);
-						outJobs.add(newJob);
-						oJobs++;
+						jobs.insert(newJob);
+						iJobs++;
 					}
 				}
 				catch (NoSuchElementException e)
@@ -65,16 +53,14 @@ public class Printer {
 			System.out.println("Cannot find file named " + fileName + ".");
 			System.out.println("Please check spelling or file existence, and try again.");
 		}
-		int min;
-		
-		while(!bh.isEmpty())
+		System.out.format("%10s%10s%10s%6s", "NAME", "NUMPAGES", "PRIORITY", "COST");
+		System.out.println();
+		for(int ix = iJobs; iJobs > 0; iJobs--)
 		{
-			min = bh.findMin();
-			System.out.println(otherJobs.findMin());
-			bh.deleteMin();
+			System.out.println(jobs.findMin().toString());
+			jobs.deleteMin();
 		}
 		
-		System.out.println(temp.compareTo(temp2));
 		
 	}
 
