@@ -50,90 +50,90 @@ public class DisjSets
     
     public void generateMaze()
     {
-		setCounter = 0;
+    	System.out.println(numCells);
+    		union(find(0),find(1));
+    		s[1].left = false;
+    		s[0].bottom = true;
+    		union(find(numCells-2), find(numCells-1));
+    		s[numCells-1].left = false;
+		setCounter = 2;
 		int randomCell;
-		System.out.println(numCells);
-		while(setCounter < numCells)
+		while(setCounter < numCells-1)
 		{
 			randomCell = (int)(Math.random() * numCells);
 			int possCells[] = {-1,-1,-1,-1};
-			int possCellChoice = -1;
-			System.out.println(randomCell);
+			int possCellChoice;
 			
 			//Checks to see if there is a possible cell above the random value
 			if(randomCell - columns > -1)
 			{
-				System.out.println("Above: " + (randomCell - columns));
 				possCells[0] = randomCell - columns;
 			}
 			//Checks if there's a cell below
 			if(randomCell + columns < numCells)
 			{
-				System.out.println("Below: " + (randomCell + columns));
 				possCells[1] = randomCell + columns;
 			}
 			//Checks if there's a cell to the left
 			if(randomCell % columns != 0)
 			{
-				System.out.println("Left: " + (randomCell - 1));
 				possCells[2] = randomCell - 1;
 			}
 			//Checks if there's a cell to the right
 			if(randomCell % columns != (columns - 1))
 			{
-				System.out.println("Right: " + (randomCell + 1));
 				possCells[3] = randomCell + 1;
 			}
 			do
 			{
 				possCellChoice = (int)(Math.random() * 3);
 			} while(possCells[possCellChoice] == -1);
-			System.out.println(possCells[possCellChoice] + " " + (find(randomCell) == find(possCells[possCellChoice])));
-			System.out.println();
-			switch (possCellChoice)
+			//if(find(randomCell) != find(possCells[possCellChoice]))
 			{
-				//If we've chosen the top cell/wall
-				case 0:
+				switch (possCellChoice)
 				{
-					if(find(possCells[0]) != find(randomCell))
+					//If we've chosen the top cell/wall
+					case 0:
 					{
-						s[possCells[0]].bottom = false;
-						union(randomCell, possCells[0]);
-						setCounter++;
+						if(find(possCells[0]) != find(randomCell))
+						{
+							s[possCells[0]].bottom = false;
+							union(find(randomCell), find(possCells[0]));
+							setCounter++;
+						}
 					}
-					
-				}
-			break;
-				//If we've chosen the bottom cell/wall
-				case 1:
-				{
-					if(find(possCells[1]) != find(randomCell))
+				break;
+					//If we've chosen the bottom cell/wall
+					case 1:
 					{
-						s[randomCell].bottom = false;
-						union(randomCell, possCells[1]);
-						setCounter++;
+						if(find(possCells[1]) != find(randomCell))
+						{
+							s[randomCell].bottom = false;
+							union(find(randomCell), find(possCells[1]));
+							setCounter++;
+						}
 					}
-				}
-			break;
-				//If we've chosen the left cell/wall
-				case 2:
-				{
-					if(find(possCells[2]) != find(randomCell))
+				break;
+					//If we've chosen the left cell/wall
+					case 2:
 					{
-						s[randomCell].left = false;
-						union(randomCell, possCells[2]);
-						setCounter++;
+						if(find(possCells[2]) != find(randomCell))
+						{
+							s[randomCell].left = false;
+							union(find(randomCell), find(possCells[2]));
+							setCounter++;
+						}
 					}
-				}
-			break;
-				//If we've chosen the right cell/wall
-				case 3:
-				{
-					if(find(possCells[3]) != find(randomCell))
+				break;
+					//If we've chosen the right cell/wall
+					case 3:
 					{
-						s[possCells[3]].left = false;
-						union(randomCell, possCells[3]);
-						setCounter++;
+						if(find(possCells[3]) != find(randomCell))
+						{
+							s[possCells[3]].left = false;
+							union(find(randomCell), find(possCells[3]));
+							setCounter++;
+						}
 					}
 				}
 			}
@@ -142,30 +142,37 @@ public class DisjSets
     
     public void printMaze()
     {
-    	for(int ix = 0; ix < columns; ++ix)
-    	{
-    		System.out.print("_");
-    	}
-    	System.out.println();
-    	for(int ix = 0; ix < rows; ++ix)
-    	{
-    		for(int iy = 0; iy < columns; ++iy)
-    		{
-	    		if(s[ix].bottom == true)
+	    	System.out.print("_");
+	    	for(int ix = 0; ix < columns; ++ix)
+	    	{
+	    		System.out.print("__");
+	    	}
+	    	System.out.println();
+	    	for(int ix = 0; ix < numCells; )
+	    	{
+	    		for(int iy = 0; iy < columns; ++iy)
 	    		{
-	    			System.out.print(" _");
+		    		if(s[ix+iy].left == true)
+		    		{
+		    			System.out.print("|");
+		    		}
+		    		if(s[ix+iy].left == false)
+		    		{
+		    			System.out.print(" ");
+		    		}
+		    		if(s[ix+iy].bottom == true)
+		    		{
+		    			System.out.print("_");
+		    		}
+		    		if (s[ix+iy].bottom == false)
+		    		{
+		    			System.out.print(" ");
+		    		}
 	    		}
-	    		else if (s[ix].bottom == false)
-	    		{
-	    			System.out.print(" ");
-	    		}
-	    		if(s[ix].left == true)
-	    		{
-	    			System.out.print("|");
-	    		}
-    		}
-    		System.out.println();
-    	}
+	    		System.out.print("|");
+	    		System.out.println();
+	    		ix += columns;
+	    	}
     }
 
     /**
@@ -205,13 +212,12 @@ public class DisjSets
     
     public void printAll()
     {
-    	for(int ix = 0; ix < s.length; ++ix)
-    	{
-    		//System.out.print(ix + ": ");
-    		System.out.print(s[ix].root);
-    		System.out.print(" ");
-    	}
-    	System.out.print("\nThere are " + setCounter + " elements in the Disjointed Sets.");
+	    	for(int ix = 0; ix < s.length; ++ix)
+	    	{
+	    		//System.out.print(ix + ": ");
+	    		System.out.print(find(ix));
+	    		System.out.print(" ");
+	    	}
     }
     
     public boolean isOne()
