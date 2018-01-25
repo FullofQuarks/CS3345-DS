@@ -1,0 +1,51 @@
+1. 
+a)
+Linked lists provide easier ways to add and delete nodes. Linked lists also utilize memory more efficiently than arrays. Size of an array must be declared at initialization, and not all of the allocated memory will be utilized. A linked list takes up only the amount of memory being used as it does not have to be located sequentially.
+b)
+Navigating an array is much quicker than a linked list. While locating a specific node in either an array or a linked list is similar by key, navigating to a specific node number in an array is much quicker as you cannot navigate by node number in a linked list without an iterator.
+
+2.
+a)
+The Big-O running time would be O(N^2). Adding to the front of an ArrayList takes n operations, and the for loop runs N times. 
+b)
+The Big-O running time would be O(N). Adding to the front of a linked list is O(1), and the loop runs N times.
+
+3.
+a)
+For an ArrayList, the while loop needs to run N times. All elements then need to shift, taking N operations. Therefore, the Big-O running time would be O(N^2)
+b)
+For a LinkedList, the while loop needs to run N times. Deleting a node takes O(1) operations. Therefore, the Big-O running time would be O(N).
+
+4.
+a)
+There are two nested loops that each take N times to navigate the array list. The running time is O(N^2)
+b)
+The same situation exists as it did for the ArrayList. The 2 while loops would take N times to complete, making the running time O(N^2).
+
+5.
+a) 
+The for loop will execute N times. The if condition for an ArrayList would execute O(1) as it is looking up an index. The else statement is simply O(1)*O(1). Therefore, the Big-O running time is O(N) for an ArrayList.
+b) 
+The for loop will execute N times. The if condition requires the entire LinkedList to be traversed, so this would execute N times. The else statement would execute O(N^2) times, because the LinkedList has to be traversed twice, O(N)+O(N). The Big-O running time of a linked list is O(N^2), as O(N^2)+2O(N).
+
+6.
+a)
+An ArrayList requires N operations to remove an item from the front of the list, as all of the succeeding indexes would have to be shifted to the front. Re-adding the items back on to the ArrayList would require N operations. The Big-O running time for the ArrayList is O(N).
+b)
+A LinkedList requires O(1) operations to remove an item from the front of the list. A LinkedList requires O(N) operations to add a node to the end of the list, because the list must be traversed each time an element is added. The Big-O running time of a LinkedList is O(N)
+
+7.
+Infix: a+b*c+(d-e)
+Postfix: abc*+ed-+
+The stack is being represented horizontally. Each line is an operation on the stack.
+
+a		<-Pushed
+a b 		<-Pushed
+a b c		<-Pushed
+a b c *		<-Operator encountered, pop twice. Perform operation
+a (b*c) +	<-Operator encountered, pop twice. Perform operation
+a+(b*c) e	<-Pushed
+a+(b*c) e d	<-Pushed
+a+(b*c) e d -	<-Operator encountered, pop twice. Perform operation.
+a+(b*c) (d-e) +	<-Operator encountered, pop twice. Perform operation.
+a+(b*c) + (d-e)	All operations completed. 

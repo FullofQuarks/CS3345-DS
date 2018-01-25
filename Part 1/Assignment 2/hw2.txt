@@ -1,0 +1,23 @@
+Assignment 2
+1.
+
+
+2.
+If f1(N) = 2N and f2(N) = 3N, why are they both O(N), since 3N is larger than 2N for N>=1?
+
+The purpose of Big-O notation and analysis is to compare the growth rate. The constant in front of both 2N and 3N simply scales the function, but both would grow at the same rate, and eventually, given long enough time and a large enough number, the rates could be considered equal with negligible difference.
+
+3.
+a)
+f1(5) = 10, f2(5) = 15
+f1(10) = 20, f2(10) = 30
+The answer doubled in each case when the N was doubled. This is because the relationship between f(N) and N is linear.
+b)
+f1(5) = 50, f2(5) = 75
+f2(10) = 200, f2(10) = 300
+The answer was quadrupled as N was doubled. Because the functions are quadratic functions, that is, the order of N is simply 2, the amount that N was changed was N^2, i.e. 2^2 is 4.
+
+4.
+Big-O notation is incredibly useful as it aides in deciding which algorithms would be more efficient to use in code. By analyzing an algorithm, and figuring out its Big-O notation, one might either tweak their algorithm, decide on another one, or keep their algorithm in place as it would theoretically run more efficiently than others.
+
+5.
