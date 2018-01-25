@@ -1,6 +1,10 @@
 # Compiled class file
 *.class
 
+# IntelliJ
+system.properties
+_config.yml
+
 # Log file
 *.log
 
