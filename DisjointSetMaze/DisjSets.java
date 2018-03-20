@@ -12,6 +12,8 @@
  * Disjoint set class, using union by rank and path compression.
  * Elements in the set are numbered starting at 0.
  * @author Mark Allen Weiss
+ * Modified by Nicholas Smith
+ * @author Nicholas Smith 
  */
 public class DisjSets
 {
@@ -48,9 +50,11 @@ public class DisjSets
     	boolean bottom;
     }
     
+    //Method added to DisjSets by Nicholas
     public void generateMaze()
     {
     	System.out.println(numCells);
+	        //Begin at top left of maze
     		union(find(0),find(1));
     		s[1].left = false;
     		s[0].bottom = true;
@@ -140,6 +144,7 @@ public class DisjSets
 		}
     }
     
+    //Print the maze using the 
     public void printMaze()
     {
 	    	System.out.print("_");
